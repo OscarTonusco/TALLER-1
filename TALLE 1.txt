@@ -1,0 +1,125 @@
+            TALLER 1
+			
+1. Escriba los 4 Principios de diseño de hardware aprendidos en clase
+
+  PRIMER PRINCIPIO.
+  
+  "La simplicidad favorece la regularidad""
+  
+  SEGUNDO PRINCIPIO.
+  
+  "Pequeño es más rapido"
+  
+  TERCER PRINCIPIO.
+  
+  "Hacer el caso comun más rapido"
+  
+  CUARTO PRINCIPIO
+  
+  "Buenos diseños demanda grandes compromisos"
+  
+2. Convertir un INSTRUCCIONES de Bajo Nivel.
+
+ int x = 0; 
+ int y = 8; 
+ int z = 1; 
+
+ y = x + 3;
+ z = z + 3;
+ x = (xz) + (3 + y);
+ 
+ x=l1   y=l2   z=l3
+ 
+   add %l1 , 3 , %l2
+   add %l3 , 3 , %l3
+   sub %l1 , %l3 , %l4
+   add   3 , %l1 , l5
+   add %l4 , %l5 , l0
+   
+ 3. de Usar el LD, y st.
+ 
+   a [4] = a [2] + x;
+
+      a=l1    X=l2
+   
+   ld  (%l1 , 8) % l3
+   add %l3 , %l2 , %l4
+   st  %l4 , %l1 , %l5
+   
+   
+   y [0] = y [40] 13;
+   
+         y=l1
+		 
+   ld (%l1 , 160) %l0
+   add %l0 , %l3 ,%g0
+   
+
+6. Convertir un lenguaje de maquina.
+
+  a.
+int main () {
+	
+	int i = 3; p = 2;
+	vuelvo i + 3;
+}
+
+   i=l1   p=l2
+
+   0X0000   add %g0 , 3 , %l1
+   0X0004   add %g0 , 2 , %l2
+   0X0008   add %l1 , 3 , %o0
+
+  10  10000  000000  00000  1  0000000000011
+  10  10001  000000  00000  1  0000000000010
+  10  01000  000000  00000  1  0000000000011
+
+  b.
+int main () {
+	int p = 3; x = 1; z = 4;
+	int w = 0; 
+	w = (p + 40) + (xz);
+	return 0; 
+}
+
+    p=l0 x=l1 z=l2 w=l3
+	
+  0X0000  add %g0 , 3 , %l0
+  0X0004  add %g0 , 1 , %l1
+  0X0008  add %g0 , 4 , %l2
+  0X000C  add %g0 , 0 , %l3
+  0X0010  add %l0 ,40 , %l4
+  0X0014  sub %l1 ,%l2, %l5
+  0X0018  add %l4 ,%l5, %l3
+  0X001C  add %g0 , 0 , %o0
+
+5. Inicializar las siguientes variables negativas usando OR.
+
+n=-12,
+a=-11,
+b=-14.  
+
+  n=l0  a=l1  b=l2
+  
+   0X0000  add %g0 , -12 , %l0       1100 -12
+   0X0004  or  %g0 , %l0 , %o0       0011
+                                     0100
+   
+   10  10000 000000 00000 1 1111111110111
+   10  01000 000010 00000 0 0000000001000
+   
+   
+   0X0008  add %g0 , -11 , %l1       1011  -11
+   0X000C  or  %g0 , %l1 , %o0       0100
+                                     0101
+   
+   10 10001 000000 00000 1 1111111110111
+   10 01001 000010 00000 0 0000000001000
+   
+   0X0010  add %g0 , -14 , %l2       1110  -14
+   0X0014  or  %g0 , %l2 , %o0       0001
+                                     0010
+									 
+   10 10010 000000 00000 1 1111111110000
+   10 01011 000000 00000 0 0000000001000   
+   
